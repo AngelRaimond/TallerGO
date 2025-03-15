@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Gestión de Usuarios</title>
+</head>
+<body>
+    <h1>Gestión de Usuarios</h1>
+    <div id="usuarios">
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Email</th>
+
+                </tr>
+            </thead>
+            <tbody id="usuariosTabla">
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        fetch('/v1/users')
+            .then(response => response.json())
+            .then(users => {
+                const tabla = document.getElementById('usuariosTabla');
+                users.forEach(user => {
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
+                        <td>${user.id}</td>
+                        <td>${user.name}</td>
+                        <td>${user.email}</td>
+                    `;
+                    tabla.appendChild(tr);
+                });
+            });
+
+    </script>
+</body>
+</html>
